@@ -1,0 +1,267 @@
+body {
+  
+    height: 100vh; /* Ensure the body takes up full viewport height */
+    overflow-y: hidden;
+    overflow-x: hidden;
+   
+
+}
+/* Sidebar styling */
+#sidenav {
+    height: 100vh; /* Full height for sidebar */
+    background-color: #1E5128; /*  */
+    color: #fff; /* Set text color to white for contrast */
+    font-size: 0.11rem; /* Smaller font size for the entire sidebar */
+    padding-top:20px;
+    padding-bottom: 10px;
+    position: absolute; /* Positioning sidebar absolutely */
+    top: 0; /* Aligns sidebar to the top */
+    left: 0; /* Aligns sidebar to the left */
+    z-index: 1; /* Ensure sidebar is above other content */
+    
+    /* Enable scrolling */
+    overflow-y: auto; /* Allows vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Optional: add styling to the scrollbar */
+#sidenav::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+#sidenav::-webkit-scrollbar-thumb {
+    background-color: #4CAF50; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded edges for the scrollbar thumb */
+}
+
+#sidenav::-webkit-scrollbar-thumb:hover {
+    background-color: #367d3b; /* Darker color on hover */
+}
+
+
+/* Header navbar */
+/* Header navbar Default style */
+
+.navbar {
+    background-color: #1E5128;
+    z-index: 6;
+    position: relative;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    margin-left: 228px; /* Aligns navbar to the right of the sidebar */ 
+    height: 50px;
+}
+
+/* Logo container */
+.logo-text-container {
+    display: flex;
+    align-items: center; /* Vertically center-align the logo and text */
+    justify-content: center; /* Center the logo and text horizontally */
+}
+
+/* Logo styling */
+.logo {
+    width: 40px; /* Set logo width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between logo and text */
+}
+
+/* Logo text styling */
+.logo-text {
+    font-size: 18px; /* Adjust text size as needed */
+    color: #fff; /* White text color for better contrast */
+}
+/* Custom style for button-like links */
+.nav-link {
+    padding: 8px 12px; /* Slightly smaller padding */
+    border-radius: 10px;
+    color: #ddd;
+    transition: background-color 0.3s ease;
+    font-size: 1rem; /* Smaller font size for links */
+}
+
+.nav-link:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.nav-link.active {
+    background-color: #000B58;
+    color: #fff;
+}
+
+/* Spacing between list items */
+.nav-item {
+    margin-top: 0px;
+    margin-bottom: 0px; /* Adjust spacing between items */
+}
+
+/* Smaller icon size */
+.nav-link i {
+    font-size: 2rem; /* Reduced icon size */
+    margin-right: 5px; /* Adjust spacing if needed */
+}
+
+
+              
+/* ///////////////////////////////////////////////////////////////////////// */
+                /* Main content area */
+
+
+        /* CARD POSITION */
+  #maincard{
+    position: center;
+    top:150px;
+   
+   
+  }
+
+
+
+/* TABLE SECTION!! */
+
+/* Main Container Styling */
+
+/* modal of add medicine */
+.modal-backdrop {
+    z-index: 1040; /* Lower z-index to allow the modal content to be on top */
+}
+
+.modal {
+    z-index: 1050 !important; /* Keep this to ensure modal content is above backdrop */
+}
+
+.modal-dialog {
+    z-index: 1055; /* Just to ensure it is above other modal components */
+}
+
+.modal-content {
+    position: relative; /* Ensure modal content is within the modal */
+}
+.modal, .modal-body, .modal-content {
+    pointer-events: auto; /* Ensure modal and its content can receive interactions */
+}
+/* Position suggestions directly below the input */
+.position-relative {
+    position: relative;
+}
+
+/* Styles for the suggestions box */
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%; /* Positions directly under the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 10; /* Ensures it appears above other elements */
+}
+
+.autocomplete-suggestion {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+/* MAIN CONTENT TABLE */
+/* Main Content Styling */
+/* Main Content Styling */
+/* Main Content Styling */
+main {
+    width: calc(100% - 228px); /* Full width minus sidebar */
+    margin-left: 228px; /* Offset for sidebar */
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+/* Center Content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%; /* Take full width */
+    overflow-x: auto; /* Allow horizontal scroll on smaller screens */
+}
+
+/* Table Container Styling */
+.table-container {
+    width: 100%; /* Full width within the main container */
+    max-width: 100%; /* Remove the fixed max-width to fit the table */
+    overflow-x: auto; /* Allow horizontal scroll */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+/* Table Styling */
+table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #407b96;
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Responsive Adjustments for Small Screens */
+@media (max-width: 768px) {
+    main {
+        margin-left: 0;
+        width: 100%;
+        padding: 10px;
+    }
+    #sidenav {
+        display: none;
+    }
+    .navbar {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    table th {
+        display: none;
+    }
+    table td {
+        padding-left: 50%; /* Position text */
+        position: relative;
+        text-align: right;
+        font-size: 14px;
+    }
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

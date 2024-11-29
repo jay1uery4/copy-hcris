@@ -1,0 +1,283 @@
+<?php include 'session.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCRIS</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+<!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <img src="assets/images/Logo.png" alt="Logo" class="logo-img">
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#" id="aboutUsBtn"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#"><i class="fas fa-notes-medical"></i> Transactions</a></li>
+
+            <!-- This is where the patient's full name will be displayed -->
+            <li class="patient-fullname" id="patientFullname" style="display: none;"></li>
+
+            <li class="dropdown-container">
+                <a href="#" id="signinSignupBtn">
+                    <i class="fas fa-user-circle"></i> 
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <!-- Dropdown for Sign In/Sign Up -->
+                <ul class="dropdown" id="dropdownMenu">
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                    <li><a href="#" id="signupBtn">Sign Up</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+
+      <!----------------------Start of Modal Forms------------------------------------------------------------------>>
+        <!-- Modal for Patient Information -->
+        <div id="patientModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closePatientModal">&times;</span>
+                <h2>Patient Information</h2>
+                <form id="patientForm" method="POST" action="submit_patient.php">
+                    <label for="fullname">Full Name:</label>
+                    <input type="text" id="patient-fullname" name="fullname" required>
+            
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" id="patient-birthday" name="birthday" required>
+            
+                    <label for="age">Age:</label>
+                    <input type="number" id="patient-age" name="age" required>
+            
+                    <label for="address">Address:</label>
+                    <input type="text" id="patient-address" name="address" required>
+            
+                    <label for="socialStatus">Social Status:</label>
+                    <select id="patient-socialStatus" name="socialStatus" required>
+                        <option value="">Select Social Status</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="widowed">Widowed</option>
+                        <option value="divorced">Divorced</option>
+                    </select>
+                    
+                    <label for="gender">Gender:</label>
+                    <select id="patient-gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+            
+                    <label for="username">Username:</label>
+                    <input type="text" id="patient-username" name="username" required>
+            
+                    <label for="password">Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="patient-password" name="password" required>
+                        <span class="eye-icon" id="togglePatientPassword" onclick="togglePassword('patient-password')">&#128065;</span>
+                    </div>
+                    
+                    <label for="c-password">Confirm Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="patient-c-password" name="c-password" required>
+                        <span class="eye-icon" id="togglePatientConfirmPassword" onclick="togglePassword('patient-c-password')">&#128065;</span>
+                    </div>
+                    
+                    <label>
+                        <input type="checkbox" id="privacyCheckbox" required>
+                        I have read and understand the <a href="#" id="privacyLink">privacy terms and policy</a>.
+                    </label>
+        
+                    <button type="button" id="verifyOtpBtn" onclick="verifyOtp()">Verify OTP</button>
+                    <div id="otpModalContainer"></div>
+                    <button type="submit" id="submitPatientBtn" disabled>Submit</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Modal for Privacy Terms and Policy -->
+        <div id="privacyModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="closePrivacyModal">&times;</span>
+                <h2>Privacy Terms and Policy</h2>
+                <p>We take your privacy seriously and are committed to safeguarding your personal information. This document outlines how we collect, use, store, and protect your data. We want you to feel confident and informed when you share your personal details with us.</p>
+                
+                <p><strong>Collection of Personal Information:</strong> When you submit your information through our forms or interact with our website, we may collect personal details such as your name, email address, contact number, and other data necessary to provide you with our services.</p>
+                
+                <p><strong>How We Use Your Information:</strong> We use the personal information you provide to process your requests, improve our services, and communicate with you effectively. Your data may also be used for customer support, troubleshooting, and sending updates related to the services you've requested.</p>
+                
+                <p><strong>Data Protection:</strong> We employ appropriate security measures to protect your personal information from unauthorized access, disclosure, alteration, and destruction. We ensure that your data is kept safe and secure throughout the entire process.</p>
+                
+                <p><strong>Sharing Your Information:</strong> We do not sell or share your personal data with third parties without your consent, except as required by law or in cases where we need to share data with trusted partners who help us deliver services to you (such as payment processors or service providers).</p>
+                
+                <p><strong>Your Rights:</strong> You have the right to access, update, or delete your personal information at any time. If you have concerns about how your data is handled, please feel free to contact us.</p>
+                
+                <p>By submitting this form, you acknowledge and consent to the collection, use, and protection of your personal information as described in this privacy policy.</p>
+                
+            </div>
+        </div>
+
+        <!-- Modal for Login -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content1">
+                <span class="close-btn" id="closeLoginModal">&times;</span>
+                <h2>Login</h2>
+                
+                <!-- Display error message if exists -->
+                <div id="errorMessage" class="error-message" style="display:none;"></div>
+
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="submitLoginForm(event)">
+                    <label for="username">Username:</label>
+                    <input type="text" id="patient-username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <div class="password-container">
+                        <input type="password" id="login-password" name="password" required>
+                        <span class="eye-icon" id="toggleLoginPassword">&#128065;</span>
+                    </div>
+
+                    <button type="submit" id="loginSubmitBtn">Login</button>
+                </form>
+            </div>
+        </div>
+        <!-- Modal for About Us -->
+        <div id="aboutModal" class="modalabout">
+            <div class="modal-content2">
+                <span class="close-btn" id="closeAboutModal">&times;</span>
+                <h2>About Health Care Record and Inventory System (HCRIS)</h2>
+                <p>
+                    The Health Care Record and Inventory System (HCRIS) is designed to help healthcare facilities 
+                    manage patient records and inventories efficiently. It streamlines patient registration, 
+                    medical history tracking, and inventory management, ensuring data accuracy and quick access 
+                    to essential information, ultimately improving healthcare delivery.
+                </p>
+            </div>
+        </div>
+        <!-- Modal for Appointment -->
+        <div id="appointmentModal" class="modal3">
+            <div class="modal-content3">
+                <span class="close-btn" id="closeAppointmentModal">&times;</span>
+                <h2>Book an Appointment</h2>
+                <form id="appointmentForm">
+                <!-- Fullname (Autofill if logged in) -->
+                    <label for="fullname">Fullname:</label>
+                    <input type="text" id="appointment-username" name="fullname" 
+                        value="" readonly placeholder="Auto-filled if logged in">
+
+                    <!-- Schedule Date -->
+                    <label for="schedule">Set a Schedule:</label>
+                    <input type="datetime-local" id="appointment-schedule" required>
+
+                    <!-- Purpose -->
+                    <label for="purpose">Purpose:</label>
+                    <input type="text" id="appointment-purpose" placeholder="Purpose of the appointment" required>
+
+                    <!-- Reason -->
+                    <label for="reason">Reason:</label>
+                    <textarea id="appointment-reason" placeholder="Explain your reason" required></textarea>
+
+                    <!-- Type of Illness -->
+                    <label for="illness">Type of Illness:</label>
+                    <input type="text" id="appointment-illness" placeholder="Type of illness (if any)" required>
+
+                    <!-- Disease (Optional) -->
+                    <label for="disease">Disease (Optional):</label>
+                    <input type="text" id="appointment-disease" placeholder="Mention any specific disease">
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="appointmentSubmitBtn">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    <!----------------------End of Modal Forms------------------------------------------------------------------>>
+    <!-- Hero Section with Background -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Your Health, Our Priority</h2>
+            <p>Providing quality healthcare services to keep you healthy</p>
+            <a href="#services" class="cta-btn">Explore Our Services</a>
+            <a href="#" class="cta1-btn" id="getAppointmentBtn">Get an Appointment</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <img src="assets/images/call.png" alt="service image">
+                <h3>Emergency Care</h3>
+                <p>24/7 emergency services with highly qualified staff ready to help in critical situations.</p>
+            </div>
+            <div class="service-card">
+                <img src="assets/images/consultation.png" alt="service image">
+                <h3>Consultations</h3>
+                <p>Our experienced doctors are here to provide regular checkups and medical consultations.</p>
+            </div>
+            <div class="service-card">
+                <img src="assets/images/test.png" alt="service image">
+                <h3>Medical Tests</h3>
+                <p>We offer a wide range of diagnostic tests with accurate and timely results.</p>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>© 2024 HCRIS. All Rights Reserved.</p>
+                </div>
+
+                <div class="footer-right">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <a href="tel:+639754242429" class="contact-link">
+                                <i class="fas fa-phone-alt"></i> +63 975-4242-429
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://goo.gl/maps/xyz" target="_blank" class="contact-link">
+                                <i class="fas fa-map-marker-alt"></i> Brgy. Panghiawan,Catarman Camiguin, Province 91004,Philippines
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://web.facebook.com/GuiLLJaMeSCMantala" target="_blank" class="contact-link">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/+639754242429" target="_blank" class="contact-link">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:info@hcris.com" class="contact-link">
+                                <i class="fas fa-envelope"></i> info@hcris.com
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

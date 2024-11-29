@@ -1,0 +1,203 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    background-color: #fff;
+    padding: 30px; /* Increased padding */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px; /* Increased container width */
+    width: 100%; /* Use full width of the screen */
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+    font-size: 32px; /* Increased font size */
+    font-weight: bold;
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: normal;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px; /* Increased padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increased font size */
+    color: #333;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+/* Button Styling */
+.btn {
+    padding: 10px 20px; /* Increased button padding */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Increased font size */
+    cursor: pointer;
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Button Alignment */
+.text-center {
+    text-align: center;
+}
+
+/* Inline Button Group */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Add spacing between buttons */
+}
+
+.btn-group .btn {
+    margin: 0;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden; /* Hide excess borders for rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #555;
+}
+
+table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    color: #333;
+}
+
+table th, table td {
+    border-right: 1px solid #ddd;
+}
+
+table th:last-child, table td:last-child {
+    border-right: none; /* Remove the right border for the last column */
+}
+
+/* Responsive Form */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px; /* Adjusted font size for smaller screens */
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .btn-group .btn {
+        margin-bottom: 10px;
+    }
+
+    /* Stack table rows vertically on smaller screens */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+    }
+
+    table th {
+        background-color: #f1f1f1;
+        color: #333;
+        font-weight: bold;
+    }
+
+    table td {
+        padding-left: 50%;
+        position: relative;
+    }
+
+    table td::before {
+        content: attr(data-label); /* Add data-label for responsive */
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+    }
+}
